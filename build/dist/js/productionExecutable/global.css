@@ -1,0 +1,23 @@
+@keyframes scroll {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+body {
+    margin: 0; /* Remove espaçamento padrão */
+    padding: 0;
+    background-color: black; /* Configura o fundo preto global */
+    color: white; /* Define o texto como branco */
+    font-family: Arial, sans-serif; /* Fonte padrão */
+}
+
+gradient-text {
+    background: linear-gradient(to right, #7f52ff, #00d4ff); /* Gradiente */
+    -webkit-background-clip: text; /* Aplica o gradiente no texto */
+    color: transparent; /* Faz o texto transparente */
+    font-weight: bold; /* Opcional: Estilo negrito */
+}

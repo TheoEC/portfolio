@@ -1,0 +1,6 @@
+gradient-text {
+    background: linear-gradient(to right, #7f52ff, #00d4ff); /* Gradiente */
+    -webkit-background-clip: text; /* Aplica o gradiente no texto */
+    color: transparent; /* Faz o texto transparente */
+    font-weight: bold; /* Opcional: Estilo negrito */
+}
