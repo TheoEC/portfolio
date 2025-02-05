@@ -1,15 +1,12 @@
 package projectsView
 
 import AppPlatforms
-import CustomCard
 import Job
 import emotion.react.css
 import jobs
 import react.FC
-import react.Props
 import react.dom.html.ReactHTML.button
 import react.dom.html.ReactHTML.div
-import react.dom.html.ReactHTML.h1
 import react.dom.html.ReactHTML.img
 import react.useState
 import web.cssom.AlignItems
@@ -221,16 +218,5 @@ val ProjectsViews = FC {
                     }
                 }
         }
-    }
-}
-
-val Example = FC<Props> {
-    CustomCard {
-        this.effectColor = "#000000"  // obrigatório
-        this.color = "#000000"         // cor padrão é branco
-        this.blur = 10                 // valor do blur (10px)
-        this.borderRadius = 0          // border radius (0px)
-
-        h1 {}
     }
 }

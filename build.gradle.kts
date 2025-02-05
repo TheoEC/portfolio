@@ -40,7 +40,7 @@ kotlin {
                 implementation(kotlinWrappers.muix.datePickers)
 
                 implementation(npm("react-icons", "5.4.0"))
-//                implementation(npm("@tsamantanis/react-glassmorphism", "1.1.2"))
+                implementation(npm("@vercel/speed-insights", "1.1.0"))
 
 
 //                implementation("org.jetbrains.kotlinx:kotlinx-js:0.5.0")
