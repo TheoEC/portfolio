@@ -39,7 +39,6 @@ const Carousel = ({ staticImages, gifImages = [], nextApp }) => {
 
   useEffect(() => {
     if (activeGifIndex !== null) {
-      console.log("Entrou na disgrama")
       setActiveGifIndex(null);
       setScale(0.8);
 

@@ -12,6 +12,7 @@ import web.cssom.BackgroundColor
 import web.cssom.Display
 import web.cssom.JustifyContent
 import web.cssom.Left
+import web.cssom.MediaQuery
 import web.cssom.NamedColor
 import web.cssom.Position
 import web.cssom.Top
@@ -33,7 +34,6 @@ fun infoCircle(
     subTitle: String = "",
 ) = FC {
     val size = if (big) BIG_CIRCLE else SMALL_CIRCLE
-    val textOffset = 200.pct
 
     div {
         css {
@@ -57,7 +57,7 @@ fun infoCircle(
                 position = Position.absolute
                 left = 100.pct
                 top = 0.pct
-                width = 100.pct
+//                width = 100.pct
                 height = 100.pct
                 display = Display.flex
                 alignItems = AlignItems.center
@@ -65,24 +65,29 @@ fun infoCircle(
             }
             div {
                 css {
-                    position = Position.absolute
+//                    position = Position.absolute
+                    display = Display.flex
                     left = 0.pct
                     top = 50.pct
-                    width = textOffset
+                    width = 200.pct
                     height = 1.px
                     backgroundColor = NamedColor.whitesmoke
                     display = Display.flex
                     alignItems = AlignItems.center
                     justifyContent = JustifyContent.center
+                    media(MediaQuery("(max-width: 850px)")) {
+                        width = size.px
+                    }
                 }
             }
             p {
                 css {
-                    position = Position.absolute
+//                    position = Position.absolute
+                    display = Display.flex
                     left = 210.pct
-                    top = 50.pct
-                    width = 100.vw
-                    transform = "translateY(-50%)".unsafeCast<Transform>()
+//                    top = 50.pct
+                    width = 30.vw
+//                    transform = "translateY(-50%)".unsafeCast<Transform>()
                 }
                 +title
                 br()

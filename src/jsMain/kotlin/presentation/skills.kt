@@ -35,5 +35,5 @@ val skillKMP = showSkill(
     name = "Kotlin Multiplataforma",
     leftIcons = listOf("/icons/kotlin.png"),
     rightIcons = KMP_ICONS,
-    highlight = true
+//    highlight = true
 )

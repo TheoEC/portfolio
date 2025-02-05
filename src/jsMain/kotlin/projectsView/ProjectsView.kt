@@ -19,10 +19,13 @@ import web.cssom.BoxShadow
 import web.cssom.Cursor
 import web.cssom.Display
 import web.cssom.FlexDirection
+import web.cssom.FlexWrap
 import web.cssom.JustifyContent
+import web.cssom.MediaQuery
 import web.cssom.NamedColor
 import web.cssom.ObjectFit
 import web.cssom.Position
+import web.cssom.TextAlign
 import web.cssom.Transform
 import web.cssom.pct
 import web.cssom.px
@@ -61,7 +64,6 @@ val ProjectsViews = FC {
 
     div {
         css {
-//            position = Position.absolute
             display = Display.flex
             flexDirection = FlexDirection.row
             alignItems = AlignItems.center
@@ -74,7 +76,7 @@ val ProjectsViews = FC {
                 display = Display.inlineFlex
                 flexDirection = FlexDirection.row
                 alignItems = AlignItems.center
-                justifyContent = JustifyContent.center
+                justifyContent = JustifyContent.spaceAround
                 width = 85.pct
                 height = 85.pct
                 backdropFilter = "blur( 10px )".unsafeCast<BackdropFilter>()
@@ -82,18 +84,18 @@ val ProjectsViews = FC {
                 border = "1px solid rgba( 255, 255, 255, 0.3 )".unsafeCast<Border>()
                 boxShadow =
                     "inset 0px 0px 200px 0px rgba( 255, 255, 255, 0.18 )".unsafeCast<BoxShadow>()
+                flexWrap = FlexWrap.wrapReverse
+                media(MediaQuery("(max-width: 650px)")) {
+                    flexDirection = FlexDirection.columnReverse
+                }
             }
 
             div {
                 css {
-                    position = Position.absolute
-                    left = 25.pct
-                    top = 50.pct
-                    transform = "translate(-50%, -50%)".unsafeCast<Transform>()
-//                    height = 80.pct
+                    position = Position.relative
                     display = Display.grid
                     gridTemplateColumns = "1fr 1fr".unsafeCast<web.cssom.GridTemplateColumns>()
-                    gap = 40.px
+                    gap = 10.pct
                 }
                 for (project in projectList) {
                     val isCurrent = projectList[currentIndex] == project
@@ -105,12 +107,13 @@ val ProjectsViews = FC {
                             gap = 5.px
                             color =
                                 if (projectList[currentIndex] == project) NamedColor.white else NamedColor.gray
+                            textAlign = TextAlign.center
                         }
                         button {
                             css {
                                 width = 70.px              // 4px maior que a imagem
                                 height = 70.px             // 4px maior que a imagem
-                                padding = 0.px
+                                padding = 5.px
                                 border = "none".unsafeCast<Border>()
                                 backgroundColor = NamedColor.transparent
                                 borderRadius = 50.pct
@@ -136,8 +139,8 @@ val ProjectsViews = FC {
                             img {
                                 src = project.urlIcon
                                 css {
-                                    width = 60.px
-                                    height = 60.px
+                                    width = 100.pct
+                                    height = 100.pct
                                     borderRadius = 50.pct
                                     objectFit = ObjectFit.cover
                                 }
@@ -169,11 +172,14 @@ val ProjectsViews = FC {
             } else
                 div {
                     css {
-                        position = Position.absolute
-                        left = 75.pct
-                        transform = "translateX(-50%)".unsafeCast<Transform>()
+                        position = Position.relative
+//                        left = 75.pct
+//                        transform = "translateX(-50%)".unsafeCast<Transform>()
                         height = 80.pct
                         aspectRatio = "9 / 20".unsafeCast<web.cssom.AspectRatio>()
+                        media(MediaQuery("(max-width: 650px)")) {
+                            height = 65.pct
+                        }
                     }
 
                     img {

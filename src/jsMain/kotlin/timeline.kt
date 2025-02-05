@@ -10,8 +10,8 @@ import web.cssom.Display
 import web.cssom.FlexDirection
 import web.cssom.JustifyContent
 import web.cssom.TextAlign
-import web.cssom.pct
 import web.cssom.px
+import web.cssom.vw
 import kotlin.js.Date
 
 
@@ -32,7 +32,7 @@ val timelineHeader = FC {
             marginTop = 100.px
             marginBottom = 80.px
             fontSize = 40.px
-            width = 100.pct
+            width = 100.vw
             display = Display.flex
             flexDirection = FlexDirection.row
             textAlign = TextAlign.center

@@ -23,18 +23,17 @@ val App = FC {
     style {
         +"body { margin: 0; padding: 0; background-color: black; color: white; font-family: Arial, sans-serif; }"
         +"@keyframes scroll { 0% { transform: translateX(0%); } 100% { transform: translateX(-200%); } }"
+        +"@keyframes scrollMarquee { 0% { transform: translateX(0%); } 100% { transform: translateX(-50%); } }"
     }
     div {
         css {
             display = Display.flex
             flexDirection = FlexDirection.column
-//            alignItems = "center".unsafeCast<web.cssom.AlignItems>() // Ce
             "*" {
                 margin = 0.px
                 padding = 0.px
             }
             backgroundColor = Color("black")
-//            height = "100vh".unsafeCast<web.cssom.Height>() // Altura total
             width = "100vw".unsafeCast<web.cssom.Width>()   // Largura total
         }
         h1 {
