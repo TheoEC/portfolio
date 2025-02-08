@@ -88,3 +88,5 @@ enum class AppPlatforms {
 }
 
 fun isMobile(job: Job) = job.platforms.any { it.isMobile() }
+
+fun Job.isDesktop() = this.platforms.any { it in listOf(AppPlatforms.WINDOWS, AppPlatforms.MACOS) }

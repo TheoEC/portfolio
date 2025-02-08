@@ -24,6 +24,7 @@ import web.cssom.TextAlign
 import web.cssom.VerticalAlign
 import web.cssom.WhiteSpace
 import web.cssom.Width
+import web.cssom.WillChange
 import web.cssom.pct
 import web.cssom.px
 import web.cssom.unaryMinus
@@ -135,6 +136,7 @@ val bottomBar = FC {
         div {
             css {
                 whiteSpace = WhiteSpace.nowrap
+                willChange = "transform".unsafeCast<WillChange>()
                 animation =
                     "scrollMarquee 10s linear infinite".unsafeCast<Animation>() // Animação de scroll"
             }

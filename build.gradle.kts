@@ -22,6 +22,9 @@ kotlin {
                 cssSupport {
                     enabled.set(true)
                 }
+                optimization.apply {
+
+                }
             }
         }
         binaries.executable()

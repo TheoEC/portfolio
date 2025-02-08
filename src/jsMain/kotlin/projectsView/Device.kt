@@ -1,21 +1,29 @@
-package projectsView
 
 import emotion.react.css
+import projectsView.Carousel
+import projectsView.mobileProjects
 import react.FC
-import react.dom.html.ReactHTML
+import react.Props
 import react.dom.html.ReactHTML.div
 import react.dom.html.ReactHTML.img
-import web.cssom.AspectRatio
+import web.cssom.MediaQuery
 import web.cssom.Position
 import web.cssom.Transform
 import web.cssom.pct
 
-fun ShowDevice(currentIndex: Int) = FC {
+external interface MediaProps : Props {
+    var currentIndex: Int
+}
+
+val Device = FC<MediaProps> { props ->
     div {
         css {
             position = Position.relative
             height = 80.pct
-            aspectRatio = "9 / 20".unsafeCast<AspectRatio>()
+            aspectRatio = "9 / 20".unsafeCast<web.cssom.AspectRatio>()
+            media(MediaQuery("(max-width: 650px)")) {
+                height = 65.pct
+            }
         }
 
         img {
@@ -29,25 +37,24 @@ fun ShowDevice(currentIndex: Int) = FC {
             src = "device/background.png"
         }
 
-        ReactHTML.div {
+        div {
             css {
                 position = Position.absolute
                 top = 3.pct
                 left = 50.pct
-                aspectRatio = "9 / 20".unsafeCast<AspectRatio>()
+                aspectRatio = "9 / 20".unsafeCast<web.cssom.AspectRatio>()
                 transform = "translateX(-50%)".unsafeCast<Transform>()
                 height = 96.pct
-//                    backgroundColor = NamedColor.blue
             }
-            Carousel() {
-                this.staticImages = projectList.map { it.urlImage }.toTypedArray()
-                this.gifImages = projectList.map { it.urlGif }.toTypedArray()
-                this.nextApp = currentIndex
-//                    this.imageWidth = 200
+
+            Carousel {
+                this.staticImages = mobileProjects.map { it.urlImage }.toTypedArray()
+                this.gifImages = mobileProjects.map { it.urlGif }.toTypedArray()
+                this.nextApp = props.currentIndex
             }
         }
 
-        ReactHTML.img {
+        img {
             css {
                 position = Position.absolute
                 left = 50.pct

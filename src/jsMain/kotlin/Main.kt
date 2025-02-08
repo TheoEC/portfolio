@@ -56,7 +56,7 @@ val jobs = listOf(
         endDate = Date(),
         startDate = Date(year = 2024, month = 10, day = 1),
         urlIcon = "icons/mandacaru.png",
-        urlGif = "device/gif2.gif",
+        urlGif = "device/acquacare_copy.webm",
         urlImage = "device/background.png",
         platforms = listOf(AppPlatforms.ANDROID, AppPlatforms.IOS)
     ),
@@ -77,7 +77,7 @@ val jobs = listOf(
         startDate = Date(year = 2021, month = 10, day = 16),
         urlIcon = "/icons/nelogica.jpg",
         urlImage = "icons/apps/vector.jpg",
-        urlGif = "icons/apps/vector.jpg",
+        urlGif = "desktop/vector.mov",
         platforms = listOf(AppPlatforms.WINDOWS),
         awards = listOf(
             Award(
