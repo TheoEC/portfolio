@@ -1,14 +1,6 @@
 import React, { useEffect, useState, memo } from 'react';
 import { SiTruenas } from 'react-icons/si';
 
-// Componente memoizado para evitar re-renderizações desnecessárias
-// const MemoizedImage = memo(({ src, alt }) => (
-//   <img
-//     src={src}
-//     alt={alt}
-//     style={{ width: '100%', display: 'block' }}
-//   />
-// ));
 const MemoizedMedia = memo(({ src, style, alt }) => {
   if (src.endsWith('.webm')) {
     return (
