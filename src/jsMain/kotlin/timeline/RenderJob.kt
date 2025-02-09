@@ -14,15 +14,11 @@ fun renderJob(job: Job, totalDuration: Double, vertical: Boolean) = FC {
     val jobPercentage = (jobDuration / totalDuration) * 100
     val jobPosition = calculateDatePercentage(job.startDate) * 1
 
-    console.log(job.companyName)
-
     val jobHeight = if (vertical) jobPercentage.pct else LINE_HEIGHT.px
     val jobWidth = if (vertical) LINE_HEIGHT.px else jobPercentage.pct
-    console.log("Job Height: $jobHeight | Job Width: $jobWidth")
 
     val jobTop = if (vertical) jobPosition.pct else 50.pct
     val jobLeft = if (vertical) 50.pct else jobPosition.pct
-    console.log("Job Top: $jobTop | Job Left: $jobLeft")
 
     var middlePoint = 1 - (jobPosition + jobPercentage / 2) / 100
     var color = getGradientColorAt(middlePoint)
@@ -43,7 +39,6 @@ fun renderJob(job: Job, totalDuration: Double, vertical: Boolean) = FC {
         val awardPosition = calculateDatePercentage(award.date)
         middlePoint = 1 - (awardPosition) / 100
         color = getGradientColorAt(middlePoint)
-        console.log("awPos: $awardPosition")
         infoCircle(
             jobLeft,
             awardPosition.pct,
