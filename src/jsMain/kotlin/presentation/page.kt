@@ -18,8 +18,10 @@ import web.cssom.FlexWrap
 import web.cssom.FontWeight
 import web.cssom.Height
 import web.cssom.JustifyContent
+import web.cssom.MaxWidth
 import web.cssom.MediaQuery
 import web.cssom.NamedColor
+import web.cssom.ObjectFit
 import web.cssom.Overflow
 import web.cssom.TextAlign
 import web.cssom.VerticalAlign
@@ -91,32 +93,41 @@ val centralInfo = FC {
             width = "100vw".unsafeCast<Width>()
 //            flex = "1 1".unsafeCast<Flex>()
             flexWrap = FlexWrap.wrapReverse
+                fontSize = 40.px
             media(MediaQuery("(max-width: 850px)")) {
                 flexDirection = FlexDirection.columnReverse
                 alignItems = AlignItems.center
+                justifyContent = JustifyContent.center
+                gap = 5.pct
                 textAlign = TextAlign.center
+                fontSize = 30.px
             }
-        }
-        div {
-            css {
-                fontSize = 40.px
-                width = 450.px
-            }
-            +"Olá, me chamo Theo e desenvolvo soluções a mais de 4 anos!"
         }
         div {
             css {
                 display = Display.flex
+                width = 450.px
+                maxWidth = "100%".unsafeCast<MaxWidth>()
             }
+            +"Olá, me chamo Theo e desenvolvo soluções a mais de 6 anos!"
+        }
+//        div {
+//            css {
+//                display = Display.flex
+//            }
             img {
                 css {
                     borderRadius = "50%".unsafeCast<BorderRadius>()
+                    width = 300.px
+                    height = 300.px
+                    maxWidth = "95%".unsafeCast<MaxWidth>()
+                    objectFit = "cover".unsafeCast<ObjectFit>()
                 }
                 src =
                     "https://avatars.githubusercontent.com/u/32726948?s=400&u=2446d64bebbc82846c0116ff335f3f51c94eb35a&v=4"
                 alt = "Foto do portfólio"
             }
-        }
+//        }
     }
 }
 

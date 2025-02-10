@@ -82,11 +82,13 @@ val ProjectsViews = FC {
                     flexDirection = FlexDirection.row
                     justifyContent = JustifyContent.spaceAround
                     alignItems = AlignItems.center
+                    marginTop = 10.px
                     width = 100.pct
                     flex = "1 1 auto".unsafeCast<web.cssom.Flex>()
                     fontSize = 14.px
                     media(MediaQuery("(max-width: 750px)")){
                         flexDirection = FlexDirection.columnReverse
+                        gap = 20.px
                     }
                 }
                 div {
@@ -96,6 +98,9 @@ val ProjectsViews = FC {
                         gridTemplateColumns =
                             "1fr 1fr".unsafeCast<web.cssom.GridTemplateColumns>()
                         gap = 20.pct
+                        media(MediaQuery("(max-width: 750px)")){
+                            gap = 5.pct
+                        }
                     }
                     for (project in projectList) {
                         val isCurrent = projectList[currentIndex] == project
