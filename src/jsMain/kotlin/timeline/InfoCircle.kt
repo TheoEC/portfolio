@@ -2,12 +2,17 @@ package timeline
 
 import emotion.css.keyframes
 import emotion.react.css
+import kotlinx.browser.window
+import org.w3c.dom.events.Event
 import react.FC
 import react.Props
 import react.dom.html.ReactHTML
 import react.dom.html.ReactHTML.br
 import react.dom.html.ReactHTML.div
 import react.dom.html.ReactHTML.p
+import react.useEffect
+import react.useRef
+import react.useState
 import theme.kotlinColor
 import web.cssom.AlignItems
 import web.cssom.BackgroundColor
@@ -58,12 +63,26 @@ fun infoCircle(
     color: String = "",
     title: String = "",
     subTitle: String = "",
-    expand: Boolean? = null,
     infoOnLeft: Boolean = false,
-) = FC<ifProps> { props ->
+) = FC {
     val size = if (big) BIG_CIRCLE else SMALL_CIRCLE
+    val (expand, setExpand) = useState(true)
+    val containerRef = useRef<web.html.HTMLDivElement>(null)
+
+    useEffect(emptyList<Any>()) {
+        console.log("useEffect")
+        val scrollHandler: (Event) -> Unit = {
+            containerRef.current?.let { element ->
+                val rect = element.getBoundingClientRect()
+                val isVisible = rect.top < window.innerHeight// && rect.bottom > 0
+                setExpand(isVisible)
+            }
+        }
+        window.addEventListener("scroll", scrollHandler)
+    }
 
     div {
+        ref = containerRef
         css {
             position = Position.absolute
             display = Display.flex
@@ -122,7 +141,6 @@ fun infoCircle(
                     width = 100.px
                     height = 1.px
                     backgroundColor = NamedColor.whitesmoke
-                    display = Display.flex
                     alignItems = AlignItems.center
                     justifyContent = JustifyContent.center
                     media(MediaQuery("(max-width: 850px)")) {

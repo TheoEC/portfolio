@@ -2,12 +2,8 @@ package timeline
 
 import Job
 import emotion.react.css
-import kotlinx.browser.window
-import org.w3c.dom.events.Event
 import react.FC
 import react.dom.html.ReactHTML.div
-import react.useEffect
-import react.useRef
 import react.useState
 import theme.getGradientColorAt
 import web.cssom.Display
@@ -27,21 +23,8 @@ fun renderJob(job: Job, totalDuration: Double) = FC {
     var color = getGradientColorAt(middlePoint)
 
     val (isHovered, setHovered) = useState(false)
-    val containerRef = useRef<web.html.HTMLDivElement>(null)
 
-    useEffect(emptyList<Any>()) {
-        console.log("useEffect")
-        val scrollHandler: (Event) -> Unit = {
-            containerRef.current?.let { element ->
-                val rect = element.getBoundingClientRect()
-                val isVisible = rect.top < window.innerHeight// && rect.bottom > 0
-                setHovered(isVisible)
-            }
-        }
-        window.addEventListener("scroll", scrollHandler)
-        // Retorne uma lambda de cleanup:
-//        return@useEffect window.removeEventListener("scroll", scrollHandler)
-    }
+
 
     infoCircle(
         jobTop,
@@ -51,7 +34,6 @@ fun renderJob(job: Job, totalDuration: Double) = FC {
         "${job.name} ",
         "${job.companyName}, ${formatToMonthYear(job.startDate)}",
         infoOnLeft = true,
-        expand = isHovered
     )()
 
     for (award in job.awards) {
@@ -66,12 +48,10 @@ fun renderJob(job: Job, totalDuration: Double) = FC {
             award.name,
             formatToMonthYear(award.date),
             infoOnLeft = false,
-            expand = isHovered
         )()
     }
 
     div {
-        ref = containerRef
         css {
 //            position = Position.absolute
 //            left = 0.pct
