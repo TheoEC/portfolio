@@ -43,7 +43,7 @@ val App = FC {
             +" "
         }
         presentation()
-        xpTimeline(jobs)()
+        xpTimeline()()
         ProjectsViews()
         SpeedInsights()
 

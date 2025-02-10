@@ -16,7 +16,7 @@ import web.cssom.px
 import web.cssom.vh
 import kotlin.js.Date
 
-val smallDevicesLeft = 35.pct
+val smallDevicesLeft = 30.pct
 
 fun xpTimelineVertical(jobList: List<Job>, scale: Double = 1.0) = FC {
     val jobs = jobList.sortedBy { it.startDate.getTime() }

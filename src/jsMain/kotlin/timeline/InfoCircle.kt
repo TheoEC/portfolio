@@ -15,6 +15,7 @@ import react.useRef
 import react.useState
 import theme.kotlinColor
 import web.cssom.AlignItems
+import web.cssom.AspectRatio
 import web.cssom.BackgroundColor
 import web.cssom.Display
 import web.cssom.FlexDirection
@@ -31,8 +32,8 @@ import web.cssom.WillChange
 import web.cssom.pct
 import web.cssom.px
 
-const val BIG_CIRCLE = 60
-const val SMALL_CIRCLE = 35
+val BIG_CIRCLE = 6.pct
+val SMALL_CIRCLE = 4.pct
 
 external interface ifProps : Props {
     var expand: Boolean
@@ -68,6 +69,7 @@ fun infoCircle(
     val size = if (big) BIG_CIRCLE else SMALL_CIRCLE
     val (expand, setExpand) = useState(true)
     val containerRef = useRef<web.html.HTMLDivElement>(null)
+    val onLeft = infoOnLeft && (window.innerWidth > 450)
 
     useEffect(emptyList<Any>()) {
         console.log("useEffect")
@@ -90,9 +92,8 @@ fun infoCircle(
             justifyContent = JustifyContent.center
             left = 50.pct
             top = circleTop
-            width = size.px
-            height = size.px
-            padding = 2.px
+            height = size
+            aspectRatio = "1".unsafeCast<AspectRatio>()
             borderRadius = 50.pct
             transform = "translateZ(0) translate(-50%, -50%)".unsafeCast<Transform>()
             willChange = "transform".unsafeCast<WillChange>()
@@ -106,7 +107,7 @@ fun infoCircle(
         div {
             css {
                 position = Position.absolute
-                if (infoOnLeft) {
+                if (onLeft) {
                     right = 100.pct
                     flexDirection = FlexDirection.rowReverse
                     transformOrigin = "right center".unsafeCast<web.cssom.TransformOrigin>()
@@ -123,7 +124,7 @@ fun infoCircle(
                 justifyContent = JustifyContent.center
                 textWrap = TextWrap.nowrap
                 willChange = "transform".unsafeCast<WillChange>()
-                animation = expand?.let {
+                animation = expand.let {
                     val timing = " 0.75s ease-in-out 0.1s both"
                     if (expand)
                         "$scaleIn $timing".unsafeCast<web.cssom.Animation>()
@@ -145,7 +146,6 @@ fun infoCircle(
                     alignItems = AlignItems.center
                     justifyContent = JustifyContent.center
                     media(MediaQuery("(max-width: 850px)")) {
-                        width = size.px
                     }
                 }
             }
@@ -153,10 +153,9 @@ fun infoCircle(
                 css {
                     display = Display.flex
                     left = 210.px
-                    if (infoOnLeft)
+                    if (onLeft)
                         textAlign = TextAlign.right
                     width = "auto".unsafeCast<Width>()
-//                    overflow = Overflow.hidden
                 }
                 +title
                 br()
@@ -168,7 +167,9 @@ fun infoCircle(
             ReactHTML.img {
                 css {
                     borderRadius = "50%".unsafeCast<web.cssom.BorderRadius>()
-                    width = 100.pct
+                    height = 100.pct
+                    border = "2px solid".unsafeCast<web.cssom.Border>()
+                    borderColor = color.unsafeCast<web.cssom.BorderColor>()
                 }
                 src = icon
             }

@@ -14,9 +14,9 @@ import web.cssom.px
 import web.cssom.vw
 import kotlin.js.Date
 
-fun xpTimeline(jobList: List<Job>, vertical: Boolean = true, scale: Double = 1.2) = FC {
+fun xpTimeline(scale: Double = 1.2) = FC {
     timelineHeader()
-    xpTimelineVertical(jobList, scale)()
+    xpTimelineVertical(jobs, scale)()
 }
 
 val timelineHeader = FC {
