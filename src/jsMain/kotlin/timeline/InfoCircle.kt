@@ -131,6 +131,7 @@ fun infoCircle(
                         "$scaleOut $timing".unsafeCast<web.cssom.Animation>()
                 }
                 media(MediaQuery("(max-width: 750px)")) {
+                    textWrap = TextWrap.wrap
                 }
             }
             div {

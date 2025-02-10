@@ -5,6 +5,7 @@ import react.FC
 import react.dom.html.ReactHTML
 import react.dom.html.ReactHTML.div
 import react.dom.html.ReactHTML.img
+import react_icons.RiTerminalBoxLine
 import web.cssom.AlignItems
 import web.cssom.Animation
 import web.cssom.Background
@@ -83,11 +84,12 @@ val centralInfo = FC {
             display = Display.flex
             alignItems = "center".unsafeCast<AlignItems>()
             justifyContent = JustifyContent.spaceAround
-            color = Color("white") // Texto em branco para contraste
+            color = Color("white")
 //            gap = 20.px
             height =
-                "calc(100vh - 100px)".unsafeCast<Height>() // Ocupa toda a altura da tela
-            width = "100vw".unsafeCast<Width>()   // Ocupa toda a largura da tela
+                "calc(100vh - 100px)".unsafeCast<Height>()
+            width = "100vw".unsafeCast<Width>()
+//            flex = "1 1".unsafeCast<Flex>()
             flexWrap = FlexWrap.wrapReverse
             media(MediaQuery("(max-width: 850px)")) {
                 flexDirection = FlexDirection.columnReverse
@@ -100,7 +102,7 @@ val centralInfo = FC {
                 fontSize = 40.px
                 width = 450.px
             }
-            +"Olá, sou Theo, desenvolvo soluções a mais de 4 anos!"
+            +"Olá, me chamo Theo e desenvolvo soluções a mais de 4 anos!"
         }
         div {
             css {
@@ -112,8 +114,6 @@ val centralInfo = FC {
                 }
                 src =
                     "https://avatars.githubusercontent.com/u/32726948?s=400&u=2446d64bebbc82846c0116ff335f3f51c94eb35a&v=4"
-                width = 400.0
-                height = 400.0
                 alt = "Foto do portfólio"
             }
         }

@@ -1,3 +1,4 @@
+
 import emotion.react.css
 import presentation.presentation
 import projectsView.ProjectsViews
@@ -46,6 +47,8 @@ val App = FC {
         xpTimeline(jobs)()
         ProjectsViews()
         SpeedInsights()
+
+        ContactButtons()
     }
 }
 
@@ -123,7 +126,7 @@ val jobs = listOf(
         urlIcon = "icons/gcompi.png",
         awards = listOf(
             Award(
-                name = "Publicação de artigo científico",
+                name = "Publicação de Artigo Científico",
                 description = "Publicação de artigo científico",
                 date = Date(year = 2019, month = 0, day = 31),
                 urlIcon = "/icons/article.png"

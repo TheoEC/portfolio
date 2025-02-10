@@ -1,12 +1,12 @@
 @file:JsModule("react-icons/ri")
 @file:JsNonModule
 
-package presentation
+package react_icons
 
 import mui.material.IconProps
 import react.FC
 
-external val RiFirebaseLine: FC<IconProps>
 external val RiTerminalBoxLine : FC<IconProps>
+external val RiWhatsappLine : FC<IconProps>
 
 
