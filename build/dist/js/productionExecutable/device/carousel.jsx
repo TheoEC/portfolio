@@ -1,18 +1,38 @@
 import React, { useEffect, useState, memo } from 'react';
-import { SiTruenas } from 'react-icons/si';
 
-const MemoizedMedia = memo(({ src, style, alt }) => {
+const animationTotalTime = 1000; // Tempo total de animação em milissegundos
+const moveTime = animationTotalTime * 0.6; // 60% do tempo para mover o carrossel
+const scaleTime = animationTotalTime * 0.2; // 40% do tempo para escalar
+
+const MemoizedMedia2 = memo(({ src, alt, paused }) => {
+  const videoRef = React.useRef(null);
+  console.log(`reproduzindo... ${paused}`)
+
+  useEffect(() => {
+    console.log("entrou useEffect")
+    if (videoRef.current) {
+      console.log(`entrou check: ${paused}`)
+      if (paused) {
+        videoRef.current.pause();
+      } else {
+        videoRef.current.play().catch((error) => console.error("Erro ao reproduzir vídeo:", error));
+      }
+    }
+  }, [paused]);
+
   if (src.endsWith('.webm')) {
     return (
       <video
+        ref={videoRef}
         src={src}
-        autoPlay
         loop
         muted
+        playsInline
         style={{ width: '100%', display: 'flex' }}
       />
     );
   }
+
   return (
     <img
       src={src}
@@ -23,11 +43,9 @@ const MemoizedMedia = memo(({ src, style, alt }) => {
 });
 
 const Carousel = ({ staticImages, gifImages = [], nextApp }) => {
-  // Usamos 100% como largura, então as medidas serão em porcentagem.
-  // O translateX será calculado como -nextApp * 100 (em %).
   const [scale, setScale] = useState(1);
-  const [translateX, setTranslateX] = useState(0); // valor em %
-  const [activeGifIndex, setActiveGifIndex] = useState(null); // null: usa imagem estática
+  const [translateX, setTranslateX] = useState(0);
+  const [activeGifIndex, setActiveGifIndex] = useState(null);
 
   useEffect(() => {
     if (activeGifIndex !== null) {
@@ -35,17 +53,21 @@ const Carousel = ({ staticImages, gifImages = [], nextApp }) => {
       setScale(0.8);
 
       const timeoutMove = setTimeout(() => {
-        setTranslateX(-nextApp * 100); // move -100% por índice
-      }, 300);
+        setTranslateX(-nextApp * 100);
+      }, scaleTime);
 
-      const timeoutFinish = setTimeout(() => {
+      const timeoutGrow = setTimeout(() => {
         setScale(1);
+      }, (scaleTime + moveTime));
+
+      const timeoutApp = setTimeout(() => {
         setActiveGifIndex(nextApp);
-      }, 800);
+      }, animationTotalTime);
 
       return () => {
         clearTimeout(timeoutMove);
-        clearTimeout(timeoutFinish);
+        clearTimeout(timeoutGrow);
+        clearTimeout(timeoutApp)
       };
     } else {
       setActiveGifIndex(nextApp);
@@ -65,23 +87,20 @@ const Carousel = ({ staticImages, gifImages = [], nextApp }) => {
         style={{
           display: 'flex',
           transform: `translateX(${translateX}%) translateZ(0)`,
-          transition: 'transform 0.5s',
+          transition: `transform ${moveTime}ms`, // Controla a duração da transição
           willChange: 'transform',
         }}
       >
-        {staticImages.map((staticSrc, idx) => {
-          const src =
-            activeGifIndex === idx && gifImages[idx]
-              ? gifImages[idx]
-              : staticSrc;
+        {gifImages.map((appSrc, idx) => {
+          const src = appSrc;
           return (
             <div
               key={idx}
               style={{
                 display: 'flex',
                 flexDirection: 'row',
-                width: '100%', // cada slide ocupa 100% da largura do container
-                flexShrink: 0, // evita encolhimento
+                width: '100%',
+                flexShrink: 0,
               }}
             >
               <div
@@ -89,12 +108,13 @@ const Carousel = ({ staticImages, gifImages = [], nextApp }) => {
                   display: 'flex',
                   width: '100%',
                   transform: `scale(${scale})`,
-                  transition: 'transform 0.3s',
+                  transition: `transform ${scaleTime}ms`, // Controla a transição de escala
                 }}
               >
-                <MemoizedMedia
+                <MemoizedMedia2
                   src={src}
                   alt={`imagem-${idx}`}
+                  paused = {activeGifIndex !== idx}
                 />
               </div>
             </div>
