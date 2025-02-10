@@ -1,29 +1,8 @@
 import React, { useEffect, useState, memo } from 'react';
 
-const animationTotalTime = 2000; // Tempo total de animação em milissegundos
+const animationTotalTime = 1000; // Tempo total de animação em milissegundos
 const moveTime = animationTotalTime * 0.6; // 60% do tempo para mover o carrossel
 const scaleTime = animationTotalTime * 0.2; // 40% do tempo para escalar
-
-const MemoizedMedia = memo(({ src, style, alt }) => {
-  if (src.endsWith('.webm')) {
-    return (
-      <video
-        src={src}
-        autoPlay
-        loop
-        muted
-        style={{ width: '100%', display: 'flex' }}
-      />
-    );
-  }
-  return (
-    <img
-      src={src}
-      alt={alt}
-      style={{ width: '100%', display: 'flex' }}
-    />
-  );
-});
 
 const MemoizedMedia2 = memo(({ src, alt, paused }) => {
   const videoRef = React.useRef(null);
@@ -112,11 +91,8 @@ const Carousel = ({ staticImages, gifImages = [], nextApp }) => {
           willChange: 'transform',
         }}
       >
-        {staticImages.map((staticSrc, idx) => {
-          const src =
-            activeGifIndex === idx && gifImages[idx]
-              ? gifImages[idx]
-              : gifImages[idx];
+        {gifImages.map((appSrc, idx) => {
+          const src = appSrc;
           return (
             <div
               key={idx}

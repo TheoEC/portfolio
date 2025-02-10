@@ -1,7 +1,6 @@
 package timeline
 
 import Job
-import LINE_HEIGHT
 import emotion.react.css
 import react.FC
 import react.dom.html.ReactHTML
@@ -35,7 +34,7 @@ fun xpTimelineHorizontal(jobList: List<Job>) = FC {
             val jobPercentage = (jobDuration / totalDuration.toDouble()) * 150
             val jobPosition = calculateDatePercentage(job.startDate) * 1
 
-            val jobHeight = LINE_HEIGHT.px
+            val jobHeight = 8.px
             val jobWidth = jobPercentage.pct
             val jobTop = 50.pct
             val jobLeft = jobPosition.pct

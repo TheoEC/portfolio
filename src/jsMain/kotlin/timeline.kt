@@ -14,11 +14,6 @@ import web.cssom.px
 import web.cssom.vw
 import kotlin.js.Date
 
-
-const val LINE_HEIGHT = 8
-
-var timeLineScale = 1
-
 fun xpTimeline(jobList: List<Job>, vertical: Boolean = true, scale: Double = 1.2) = FC {
     timelineHeader()
     xpTimelineVertical(jobList, scale)()

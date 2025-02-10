@@ -32,7 +32,7 @@ fun drawDate(date: Date) = FC {
                 height = 1.px
                 backgroundColor = NamedColor.lightgray
                 opacity = 0.15.unsafeCast<Opacity>()
-                fontSize = 35.px
+                fontSize = 30.px
                 fontWeight = 700.unsafeCast<web.cssom.FontWeight>()
                 color = NamedColor.white
             }

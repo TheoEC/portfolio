@@ -16,7 +16,6 @@ import web.cssom.BoxShadow
 import web.cssom.Cursor
 import web.cssom.Display
 import web.cssom.FlexDirection
-import web.cssom.FlexWrap
 import web.cssom.JustifyContent
 import web.cssom.MediaQuery
 import web.cssom.NamedColor
@@ -63,7 +62,6 @@ val ProjectsViews = FC {
                 border = "1px solid rgba( 255, 255, 255, 0.3 )".unsafeCast<Border>()
                 boxShadow =
                     "inset 0px 0px 200px 0px rgba( 255, 255, 255, 0.18 )".unsafeCast<BoxShadow>()
-                flexWrap = FlexWrap.wrapReverse
                 padding = 20.px
                 fontSize = 36.px
                 media(MediaQuery("(max-width: 750px)")){

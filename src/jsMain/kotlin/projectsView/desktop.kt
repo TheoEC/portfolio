@@ -32,7 +32,7 @@ val Desktop = FC {
                 height = 100.pct
                 width = 100.pct
             }
-            src = "device/laptop.png"
+            src = "desktop/frame.png"
         }
         video {
             css {

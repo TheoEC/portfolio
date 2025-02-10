@@ -48,7 +48,7 @@ val Device = FC<MediaProps> { props ->
             }
 
             Carousel {
-                this.staticImages = mobileProjects.map { it.urlImage }.toTypedArray()
+//                this.staticImages = mobileProjects.map { it.urlImage }.toTypedArray()
                 this.gifImages = mobileProjects.map { it.urlGif }.toTypedArray()
                 this.nextApp = props.currentIndex
             }

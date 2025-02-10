@@ -1,38 +1,57 @@
 package timeline
 
 import Job
-import LINE_HEIGHT
+import emotion.react.css
+import kotlinx.browser.window
+import org.w3c.dom.events.Event
 import react.FC
+import react.dom.html.ReactHTML.div
+import react.useEffect
+import react.useRef
 import react.useState
 import theme.getGradientColorAt
+import web.cssom.Display
+import web.cssom.Flex
+import web.cssom.NamedColor
 import web.cssom.pct
-import web.cssom.px
 import kotlin.js.Date
 
-fun renderJob(job: Job, totalDuration: Double, vertical: Boolean) = FC {
+fun renderJob(job: Job, totalDuration: Double) = FC {
     val jobDuration = calculateDuration(job.startDate, job.endDate)
     val jobPercentage = (jobDuration / totalDuration) * 100
     val jobPosition = calculateDatePercentage(job.startDate) * 1
 
-    val jobHeight = if (vertical) jobPercentage.pct else LINE_HEIGHT.px
-    val jobWidth = if (vertical) LINE_HEIGHT.px else jobPercentage.pct
-
-    val jobTop = if (vertical) jobPosition.pct else 50.pct
-    val jobLeft = if (vertical) 50.pct else jobPosition.pct
+    val jobTop = jobPosition.pct
 
     var middlePoint = 1 - (jobPosition + jobPercentage / 2) / 100
     var color = getGradientColorAt(middlePoint)
 
     val (isHovered, setHovered) = useState(false)
+    val containerRef = useRef<web.html.HTMLDivElement>(null)
+
+    useEffect(emptyList<Any>()) {
+        console.log("useEffect")
+        val scrollHandler: (Event) -> Unit = {
+            containerRef.current?.let { element ->
+                val rect = element.getBoundingClientRect()
+                val isVisible = rect.top < window.innerHeight// && rect.bottom > 0
+                setHovered(isVisible)
+            }
+        }
+        window.addEventListener("scroll", scrollHandler)
+        // Retorne uma lambda de cleanup:
+//        return@useEffect window.removeEventListener("scroll", scrollHandler)
+    }
 
     infoCircle(
-        jobLeft,
         jobTop,
         true,
         job.urlIcon,
         color,
         "${job.name} ",
         "${job.companyName}, ${formatToMonthYear(job.startDate)}",
+        infoOnLeft = true,
+        expand = isHovered
     )()
 
     for (award in job.awards) {
@@ -40,16 +59,30 @@ fun renderJob(job: Job, totalDuration: Double, vertical: Boolean) = FC {
         middlePoint = 1 - (awardPosition) / 100
         color = getGradientColorAt(middlePoint)
         infoCircle(
-            jobLeft,
             awardPosition.pct,
             false,
             award.urlIcon,
             color,
             award.name,
             formatToMonthYear(award.date),
+            infoOnLeft = false,
+            expand = isHovered
         )()
     }
 
+    div {
+        ref = containerRef
+        css {
+//            position = Position.absolute
+//            left = 0.pct
+//            top = jobPosition.pct
+//            height = jobPercentage.pct
+//            width = 100.pct
+            display = Display.flex
+            backgroundColor = NamedColor.red
+            flex = "1 1".unsafeCast<Flex>()
+        }
+    }
 }
 
 fun formatToMonthYear(date: Date): String {
