@@ -64,7 +64,11 @@ val ContactButtons = FC {
             aspectRatio = 1.unsafeCast<AspectRatio>()
             right = 10.px
             bottom = 55.px
-            opacity = 0.5.unsafeCast<web.cssom.Opacity>()
+            opacity = if (window.innerWidth > 768)
+                0.5.unsafeCast<web.cssom.Opacity>()
+            else
+                0.75.unsafeCast<web.cssom.Opacity>()
+            transition = "opacity 0.5s ease-in-out".unsafeCast<web.cssom.Transition>()
             hover {
                 opacity = 1.unsafeCast<web.cssom.Opacity>()
             }
@@ -77,7 +81,7 @@ val ContactButtons = FC {
 //            this.position = 2
 //        }
         WhatsAppButton {
-            this.expand = expand
+            this.expand = (expand || window.innerWidth < 768)
             this.position = 1
         }
         LinkedInButton()
