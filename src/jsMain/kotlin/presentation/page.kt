@@ -2,26 +2,24 @@ package presentation
 
 import emotion.react.css
 import react.FC
-import react.dom.html.ReactHTML
 import react.dom.html.ReactHTML.div
 import react.dom.html.ReactHTML.img
 import react_icons.RiTerminalBoxLine
 import web.cssom.AlignItems
 import web.cssom.Animation
+import web.cssom.AspectRatio
 import web.cssom.Background
 import web.cssom.Border
 import web.cssom.BorderRadius
 import web.cssom.Color
 import web.cssom.Display
 import web.cssom.FlexDirection
-import web.cssom.FlexWrap
 import web.cssom.FontWeight
 import web.cssom.Height
 import web.cssom.JustifyContent
 import web.cssom.MaxWidth
 import web.cssom.MediaQuery
 import web.cssom.NamedColor
-import web.cssom.ObjectFit
 import web.cssom.Overflow
 import web.cssom.TextAlign
 import web.cssom.VerticalAlign
@@ -31,6 +29,7 @@ import web.cssom.WillChange
 import web.cssom.pct
 import web.cssom.px
 import web.cssom.unaryMinus
+import web.cssom.vw
 
 val presentation = FC {
     div {
@@ -81,19 +80,18 @@ val topBar = FC {
 }
 
 val centralInfo = FC {
-    ReactHTML.div {
+    div {
         css {
             display = Display.flex
             alignItems = "center".unsafeCast<AlignItems>()
-            justifyContent = JustifyContent.spaceAround
+            flexDirection = FlexDirection.row
+            justifyContent = JustifyContent.center
             color = Color("white")
-//            gap = 20.px
+            gap = 20.px
             height =
                 "calc(100vh - 100px)".unsafeCast<Height>()
             width = "100vw".unsafeCast<Width>()
-//            flex = "1 1".unsafeCast<Flex>()
-            flexWrap = FlexWrap.wrapReverse
-                fontSize = 40.px
+            fontSize = 40.px
             media(MediaQuery("(max-width: 850px)")) {
                 flexDirection = FlexDirection.columnReverse
                 alignItems = AlignItems.center
@@ -111,23 +109,24 @@ val centralInfo = FC {
             }
             +"Olá, me chamo Theo e desenvolvo soluções a mais de 6 anos!"
         }
-//        div {
-//            css {
-//                display = Display.flex
-//            }
-            img {
-                css {
-                    borderRadius = "50%".unsafeCast<BorderRadius>()
-                    width = 300.px
-                    height = 300.px
-                    maxWidth = "95%".unsafeCast<MaxWidth>()
-                    objectFit = "cover".unsafeCast<ObjectFit>()
+        img {
+            css {
+                borderRadius = "50%".unsafeCast<BorderRadius>()
+                aspectRatio = "1/1".unsafeCast<AspectRatio>() // Mantém largura e altura iguais
+                objectFit = "cover".unsafeCast<web.cssom.ObjectFit>()
+                height = 50.pct
+                width = "auto".unsafeCast<Width>()
+                maxWidth = 100.pct
+                maxHeight = 100.pct
+                media(MediaQuery("(max-width: 850px)")) {
+                    width = 60.vw
+                    height = "auto".unsafeCast<Height>()
                 }
-                src =
-                    "https://avatars.githubusercontent.com/u/32726948?s=400&u=2446d64bebbc82846c0116ff335f3f51c94eb35a&v=4"
-                alt = "Foto do portfólio"
             }
-//        }
+            src =
+                "https://avatars.githubusercontent.com/u/32726948?s=400&u=2446d64bebbc82846c0116ff335f3f51c94eb35a&v=4"
+            alt = "Foto do portfólio"
+        }
     }
 }
 
