@@ -6,12 +6,9 @@ const scaleTime = animationTotalTime * 0.2; // 40% do tempo para escalar
 
 const MemoizedMedia2 = memo(({ src, alt, paused }) => {
   const videoRef = React.useRef(null);
-  console.log(`reproduzindo... ${paused}`)
 
   useEffect(() => {
-    console.log("entrou useEffect")
     if (videoRef.current) {
-      console.log(`entrou check: ${paused}`)
       if (paused) {
         videoRef.current.pause();
       } else {
@@ -48,7 +45,7 @@ const Carousel = ({ staticImages, gifImages = [], nextApp }) => {
   const [activeGifIndex, setActiveGifIndex] = useState(null);
 
   useEffect(() => {
-    if (activeGifIndex !== null) {
+    if (activeGifIndex !== null || nextApp !== 0) {
       setActiveGifIndex(null);
       setScale(0.8);
 
@@ -70,7 +67,9 @@ const Carousel = ({ staticImages, gifImages = [], nextApp }) => {
         clearTimeout(timeoutApp)
       };
     } else {
+      console.log(`entrou ${nextApp}`)
       setActiveGifIndex(nextApp);
+      setTranslateX(-nextApp * 100);
     }
   }, [nextApp]);
 
@@ -114,7 +113,7 @@ const Carousel = ({ staticImages, gifImages = [], nextApp }) => {
                 <MemoizedMedia2
                   src={src}
                   alt={`imagem-${idx}`}
-                  paused = {activeGifIndex !== idx}
+                  paused={activeGifIndex !== idx}
                 />
               </div>
             </div>

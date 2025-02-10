@@ -3,7 +3,6 @@ package projectsView
 import Device
 import emotion.react.css
 import isDesktop
-import jobs
 import react.FC
 import react.dom.html.ReactHTML.button
 import react.dom.html.ReactHTML.div
@@ -26,15 +25,22 @@ import web.cssom.pct
 import web.cssom.px
 import web.cssom.vh
 import web.cssom.vw
+import xpAcquacare
+import xpMandacaru
+import xpNelogica
 
-val projectList = jobs.filter { job -> job.platforms.isNotEmpty() }
-val mobileProjects = jobs.filter { job -> job.platforms.any { it.isMobile() } }
+//val projectList = jobs.filter { job -> job.platforms.isNotEmpty() }
+//val mobileProjects = jobs.filter { job -> job.platforms.any { it.isMobile() } }
+
+
+val mobileProjects = listOf(xpMandacaru, xpAcquacare)
+val projectList = mobileProjects + xpNelogica
 
 val ProjectsViews = FC {
     val (currentIndex, setCurrentIndex) = useState(0)
-    val (currentMobileIndex, setCurrentMobileIndex) = useState(1)
     val currentProject = projectList[currentIndex]
 
+    val (currentMobileIndex, setCurrentMobileIndex) = useState<Int?>(null)
     val mobileIndex = mobileProjects.indexOf(currentProject)
     if (mobileIndex != -1 && mobileIndex != currentMobileIndex)
         setCurrentMobileIndex(mobileProjects.indexOf(currentProject))
@@ -148,7 +154,7 @@ val ProjectsViews = FC {
                     Desktop()
                 } else
                     Device {
-                        this.currentIndex = currentMobileIndex
+                        this.currentIndex = currentMobileIndex ?: 1
                     }
             }
         }
